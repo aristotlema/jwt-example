@@ -1,7 +1,13 @@
 import React from 'react';
+import LoginForm from '../components/AuthForms/LoginForm';
+import './App.scss';
 
 const App = () => {
-    return <div>App</div>;
+    return (
+        <main>
+            <LoginForm />
+        </main>
+    );
 };
 
 export default App;
