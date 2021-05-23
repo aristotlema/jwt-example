@@ -2,7 +2,12 @@ const express = require('express');
 const app = express();
 const { sequelize } = require('./models');
 
-app.listen(4001, async () => {
+app.use(express.json());
+
+const userRouter = require('./routes/userRoutes');
+app.use('/user', userRouter);
+
+app.listen(4000, async () => {
     console.log('Server is running on port 4000');
     try {
         await sequelize.authenticate();
