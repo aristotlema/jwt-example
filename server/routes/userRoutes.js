@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+//Create Account
 router.post('/', async (req, res) => {
     const { userName, passWord } = req.body;
     try {
@@ -21,6 +22,27 @@ router.post('/', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: err.message });
+    }
+});
+
+//Login
+router.post('/login', async (req, res) => {
+    const user = await User.findOne({ 
+        where: {
+            userName: req.body.userName
+        }
+    });
+    if(user == null) {
+        return res.status(400).json({ message: "No user was found with that User Name" });
+    }
+    try {
+        if(user.passWord === req.body.passWord) {
+            res.send('Success');
+        } else {
+            res.send('Incorrect User Name and Password');
+        }
+    } catch {
+        res.status(500).send();
     }
 });
 
