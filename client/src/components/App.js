@@ -1,7 +1,8 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import LoginForm from '../components/AuthForms/LoginForm';
-import CreatFrom from '../components/AuthForms/CreateForm';
+import CreateFrom from '../components/AuthForms/CreateForm';
+import HomePage from './HomePage';
 import './App.scss';
 import history from '../history';
 
@@ -11,7 +12,8 @@ const App = () => {
             <Router history={history} >
                 <div>
                     <Route path="/" exact component={LoginForm} />
-                    <Route path="/login/create" exact component={CreatFrom} />
+                    <Route path="/login/create" exact component={CreateFrom} />
+                    <Route path="/home" exact component={HomePage} />
                 </div>
             </Router>
         </main>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,12 +14,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LoginForm = () => {
+const LoginForm = ({ loginUser }) => {
     const classes = useStyles();
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = (formValues) => {
+        console.log('login attempt')
+        loginUser(formValues);
     };
 
     return (
@@ -34,4 +37,7 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default connect(
+    null,
+    { loginUser }
+)(LoginForm);
