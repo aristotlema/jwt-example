@@ -3,8 +3,19 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions';
+import { TextField, Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+}));
 
 const CreateForm = ({ createUser }) => {
+    const classes = useStyles();
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (formValues) => {
@@ -13,17 +24,15 @@ const CreateForm = ({ createUser }) => {
 
     return (
         <>
-            <h2>Create an Account</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="userName">User Name</label>
-                <input {...register("userName")} />
-                <label htmlFor="passWord">password</label>
-                <input {...register("passWord")} type="password"/>
-                <p>
+            <Typography variant="h3">Create an Account</Typography>
+            <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
+                <TextField label="User Name" {...register("userName")} />
+                <TextField label="Password" {...register("passWord")} type="password"/>
+                <Typography>
                     Already have an account? <Link to="/">Sign in</Link>
-                </p>
+                </Typography>
 
-                <input type="submit" />
+                <Button type="submit" color="primary" variant="contained">Submit</Button>
             </form>
         </>
     );
