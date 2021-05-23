@@ -1,5 +1,14 @@
 import { combineReducers } from 'redux';
 
+const usersReducer = (state = {}, action) => {
+    switch(action.type) {
+        case 'CREATE_USER':
+            return state;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
-    test: () => 'replace me'
+    users: usersReducer
 });

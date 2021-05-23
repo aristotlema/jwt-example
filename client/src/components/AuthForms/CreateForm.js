@@ -1,17 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
+import { createUser } from '../../actions';
 
-const CreateForm = () => {
+const CreateForm = ({ createUser }) => {
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = (formValues) => {
+        createUser(formValues);
     };
 
     return (
         <>
-            <h2>Creat an Account</h2>
+            <h2>Create an Account</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="userName">User Name</label>
                 <input {...register("userName")} />
@@ -27,4 +29,7 @@ const CreateForm = () => {
     );
 };
 
-export default CreateForm
+export default connect(
+    null,
+    { createUser }
+)(CreateForm);
